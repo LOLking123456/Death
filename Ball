@@ -6,7 +6,7 @@ local UI = Material.Load({
      Style = 1,
      SizeX = 370,
      SizeY = 400,
-     Theme = "Dark"
+     Theme = "LightTheme"
 })
 
 local main = UI.New({Title = "Main-Features"})
@@ -54,27 +54,17 @@ main.Slider({
 main.Toggle({
 	Text = "Auto Parry",
 		Callback = function(Value)
-		     a = Value
-        while a do task.wait(.1)
-        pcall(function()
-
-local vim = game:GetService'VirtualInputManager'
-local x = game.Players.LocalPlayer.PlayerGui.UnBoxing.UnBoxing.HolderBottom.CurrencyHolder.CurrencyAmountLabel
-
-vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosition.Y+50,0,true,x,1)
-vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosition.Y+50,0,false,x,1)
- end)
-        end
+		  
         	end,
 	Enabled = false
 })
 
 
 main.Toggle({
-	Text = "Auto Macro Block",
+	Text = "Auto Macro Block (Like Auto Parry)",
 		Callback = function(Value)
 		     a = Value
-        while a do task.wait(.1)
+        while a do task.wait(2)
         pcall(function()
 
 local vim = game:GetService'VirtualInputManager'
