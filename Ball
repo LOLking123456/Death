@@ -77,40 +77,6 @@ vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosit
         	end,
 	Enabled = false
 })
-main.Toggle({
-	Text = "Ball ESP",
-		Callback = function(Value)
-		     a = Value
-        while a do task.wait(1)
-        pcall(function()
-	
-	for __,v in pairs(game.workspace.FX:GetChildren()) do -- the path
- if v.Name == "Mobile_Default" then  
-   local a = Instance.new("BillboardGui",v) -- pretty much explains everything
-   a.Name = "Ball1"
-   a.Size = UDim2.new(10,0, 10,0)
-   a.AlwaysOnTop = true
-   local b = Instance.new("Frame",a)
-   b.Size = UDim2.new(1,0, 1,0)
-   b.BackgroundTransparency = 1
-   b.BorderSizePixel = 0
-   
-   local c = Instance.new('TextLabel',b)
-   c.TextColor3 = Color3.new(255, 255, 0)
-   c.Size = UDim2.new(2,0,2,0)
-   c.BorderSizePixel = 0
-   c.TextSize = 15
-   c.Text = "Ball"
-   c.BackgroundTransparency = 1
- end
-end
-		end)
-		end
-	end,
-	Enabled = false
-})
-
-
 
 main.Button({
 	Text = "Noclip (OP, HIDE IN THINGS)",
