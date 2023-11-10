@@ -69,6 +69,24 @@ vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosit
 	Enabled = false
 })
 
+
+main.Toggle({
+	Text = "Auto Macro Block",
+		Callback = function(Value)
+		     a = Value
+        while a do task.wait(.1)
+        pcall(function()
+
+local vim = game:GetService'VirtualInputManager'
+local x = game.Players.LocalPlayer.PlayerGui.UI.HUD.MobileButtonHolder.DefaultButtons.DeflectButton
+
+vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosition.Y+50,0,true,x,1)
+vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosition.Y+50,0,false,x,1)
+ end)
+        end
+        	end,
+	Enabled = false
+})
 main.Toggle({
 	Text = "Ball ESP",
 		Callback = function(Value)
@@ -76,8 +94,8 @@ main.Toggle({
         while a do task.wait(.1)
         pcall(function()
 	
-	for __,v in pairs(game.workspace.Balls:GetChildren()) do -- the path
- if v:IsA("Part") then -- the item
+	for __,v in pairs(game.workspace.FX:GetChildren()) do -- the path
+ if v.Name == "Mobile_Default" then 
    local a = Instance.new("BillboardGui",v) -- pretty much explains everything
    a.Name = "Ball1"
    a.Size = UDim2.new(10,0, 10,0)
@@ -134,9 +152,71 @@ noclip() -- to toggle noclip() and clip()
 end})
 
 
+main.Button({
+	Text = "CFrame Speed (Z)",
+		Callback = function()
+        repeat
+		wait()
+	until game:IsLoaded()
+	local L_134_ = game:service('Players')
+	local L_135_ = L_134_.LocalPlayer
+	repeat
+		wait()
+	until L_135_.Character
+	local L_136_ = game:service('UserInputService')
+	local L_137_ = game:service('RunService')
+	getgenv().Multiplier = 0.5
+	local L_138_ = true
+	local L_139_
+	L_136_.InputBegan:connect(function(L_140_arg0)
+		if L_140_arg0.KeyCode == Enum.KeyCode.LeftBracket then
+			Multiplier = Multiplier + 0.01
+			print(Multiplier)
+			wait(0.2)
+			while L_136_:IsKeyDown(Enum.KeyCode.LeftBracket) do
+				wait()
+				Multiplier = Multiplier + 0.01
+				print(Multiplier)
+			end
+		end
+		if L_140_arg0.KeyCode == Enum.KeyCode.RightBracket then
+			Multiplier = Multiplier - 0.01
+			print(Multiplier)
+			wait(0.2)
+			while L_136_:IsKeyDown(Enum.KeyCode.RightBracket) do
+				wait()
+				Multiplier = Multiplier - 0.01
+				print(Multiplier)
+			end
+		end
+		if L_140_arg0.KeyCode == Enum.KeyCode.Z then
+			L_138_ = not L_138_
+			if L_138_ == true then
+				repeat
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.Humanoid.MoveDirection * Multiplier
+					game:GetService("RunService").Stepped:wait()
+				until L_138_ == false
+			end
+		end
+	end)
+        end})
+main.Slider({
+	Text = "CFrame Speed",
+	Callback = function(s)
+ 
+ getgenv().Multiplier = s
+	end,
+	Min = 0,
+	Max = 5,
+	Def = 0
+})
+main.Button({
+	Text = "CFrame Speed (Z)",
+		Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+end})
 
-
-local main1 = UI.New({Title = "Player-Features"})
+local main1 = UI.New({Title = "Misc-Features"})
 
  main1.Toggle({
 	Text = "Infinite Jump",
@@ -168,28 +248,6 @@ end
 	end,
 	Enabled = false
 })
-main1.Slider({
-	Text = "Walkspeed",
-	Callback = function(s)
-
-   getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
-
-local Player = game:service'Players'.LocalPlayer;
-
-Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
-
-Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
-
-end)
-
-
-Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
-end,
-	Min = 16,
-	Max = 150,
-	Def = 16
-})
-
 
 
 	main1.Button({
@@ -254,4 +312,3 @@ for i,v in pairs(creators) do
         end;
     });
 end;
-
