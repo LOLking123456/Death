@@ -1,0 +1,257 @@
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+local Settings = {}
+
+local UI = Material.Load({
+     Title = "Death Ball | Legend HandlesYT",
+     Style = 1,
+     SizeX = 370,
+     SizeY = 400,
+     Theme = "Dark"
+})
+
+local main = UI.New({Title = "Main-Features"})
+
+main.Toggle({
+    Text = "Dodge Ball (FIXED)",
+    Enabled = false,
+    Callback = function(Value)
+      a = Value
+        while a do task.wait()
+        pcall(function()
+        for i,v in pairs(workspace.FX:GetChildren()) do
+                    if v.Name == "Mobile_Default" then 
+                   
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(0,Settings.Height,Settings.Distance)
+    end
+    end
+     end)
+     end
+	end,
+	Enabled = false
+})
+
+main.Slider({
+    Text = "Dodge Ball Distance",
+    Callback = function(v)
+        Settings["Distance"] = v
+    end,
+    Min = -20,
+    Max = 20,
+    Def = 17
+})
+
+
+main.Slider({
+    Text = "Dodge Ball Height",
+    Callback = function(v)
+        Settings["Height"] = v
+    end,
+    Min = -20,
+    Max = 20,
+    Def = -12
+})
+
+main.Toggle({
+	Text = "Auto Parry",
+		Callback = function(Value)
+		     a = Value
+        while a do task.wait(.1)
+        pcall(function()
+
+local vim = game:GetService'VirtualInputManager'
+local x = game.Players.LocalPlayer.PlayerGui.UnBoxing.UnBoxing.HolderBottom.CurrencyHolder.CurrencyAmountLabel
+
+vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosition.Y+50,0,true,x,1)
+vim:SendMouseButtonEvent(x.AbsolutePosition.X+x.AbsoluteSize.X/2,x.AbsolutePosition.Y+50,0,false,x,1)
+ end)
+        end
+        	end,
+	Enabled = false
+})
+
+main.Toggle({
+	Text = "Ball ESP",
+		Callback = function(Value)
+		     a = Value
+        while a do task.wait(.1)
+        pcall(function()
+	
+	for __,v in pairs(game.workspace.Balls:GetChildren()) do -- the path
+ if v:IsA("Part") then -- the item
+   local a = Instance.new("BillboardGui",v) -- pretty much explains everything
+   a.Name = "Ball1"
+   a.Size = UDim2.new(10,0, 10,0)
+   a.AlwaysOnTop = true
+   local b = Instance.new("Frame",a)
+   b.Size = UDim2.new(1,0, 1,0)
+   b.BackgroundTransparency = 1
+   b.BorderSizePixel = 0
+   
+   local c = Instance.new('TextLabel',b)
+   c.TextColor3 = Color3.new(255, 255, 0)
+   c.Size = UDim2.new(2,0,2,0)
+   c.BorderSizePixel = 0
+   c.TextSize = 15
+   c.Text = "Ball"
+   c.BackgroundTransparency = 1
+ end
+end
+		end)
+		end
+	end,
+	Enabled = false
+})
+
+
+
+main.Button({
+	Text = "Noclip (OP, HIDE IN THINGS)",
+		Callback = function()
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
+end})
+
+
+
+
+local main1 = UI.New({Title = "Player-Features"})
+
+ main1.Toggle({
+	Text = "Infinite Jump",
+	Callback = function(state)
+ if state then
+_G.infinjump = true
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+Mouse.KeyDown:connect(function(k)
+if _G.infinjump then
+if k:byte() == 32 then
+Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+Humanoid:ChangeState("Jumping")
+wait(0.1)
+Humanoid:ChangeState("Seated")
+end
+end
+end)
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+    else
+if _G.infinjump == true then
+_G.infinjump = false
+else
+_G.infinjump = true
+end
+end
+            
+	end,
+	Enabled = false
+})
+main1.Slider({
+	Text = "Walkspeed",
+	Callback = function(s)
+
+   getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
+
+local Player = game:service'Players'.LocalPlayer;
+
+Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+
+end)
+
+
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+end,
+	Min = 16,
+	Max = 150,
+	Def = 16
+})
+
+
+
+	main1.Button({
+	Text = "Free Camera",
+		Callback = function()
+local LocalPlayer = game:GetService("Players").LocalPlayer
+		LocalPlayer.CameraMaxZoomDistance = 9e9
+		LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+end})
+
+
+	main1.Button({
+	Text = "FPS Booster",
+		Callback = function()
+		       for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part"
+or v.ClassName == "SpawnLocation"
+or v.ClassName == "WedgePart"
+or v.ClassName == "Terrain"
+or v.ClassName == "MeshPart" then
+v.Material = "Plastic"
+end
+end
+		    end})
+		    
+
+main1.Toggle({
+	Text = "Free Camera",
+		Callback = function(Value)
+  local LocalPlayer = game:GetService("Players").LocalPlayer
+		LocalPlayer.CameraMaxZoomDistance = 9e9
+		LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+	end,
+	Enabled = false
+})
+
+
+
+main1.Button({
+	Text = "Reset",
+		Callback = function()
+ game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end})
+
+
+
+
+-- // Credits \\ --
+local cred = UI.New({
+    Title = "Credits"
+})
+
+local creators = {
+    "YT: Legend Handles",
+}
+
+for i,v in pairs(creators) do 
+    cred.Button({
+        Text = v,
+        Callback = function()
+            setclipboard(v) 
+        end;
+    });
+end;
+
