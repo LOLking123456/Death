@@ -6,7 +6,7 @@ local UI = Material.Load({
      Style = 1,
      SizeX = 370,
      SizeY = 400,
-     Theme = "LightTheme"
+     Theme = "Light"
 })
 
 local main = UI.New({Title = "Main-Features"})
@@ -51,9 +51,17 @@ main.Slider({
     Def = -12
 })
 
+main.Toggle({
+	Text = "Auto Parry",
+		Callback = function(Value)
+		  
+        	end,
+	Enabled = false
+})
+
 
 main.Toggle({
-	Text = "Auto Parry (WORKS)",
+	Text = "Auto Macro Block (Like Auto Parry)",
 		Callback = function(Value)
 		     a = Value
         while a do task.wait(2)
@@ -73,7 +81,7 @@ main.Toggle({
 	Text = "Ball ESP",
 		Callback = function(Value)
 		     a = Value
-        while a do task.wait(2)
+        while a do task.wait(.1)
         pcall(function()
 	
 	for __,v in pairs(game.workspace.FX:GetChildren()) do -- the path
