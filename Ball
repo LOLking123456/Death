@@ -81,11 +81,11 @@ main.Toggle({
 	Text = "Ball ESP",
 		Callback = function(Value)
 		     a = Value
-        while a do task.wait(.1)
+        while a do task.wait(1)
         pcall(function()
 	
 	for __,v in pairs(game.workspace.FX:GetChildren()) do -- the path
- if v.Name == "Mobile_Default" then 
+ if v.Name == "Mobile_Default" then  
    local a = Instance.new("BillboardGui",v) -- pretty much explains everything
    a.Name = "Ball1"
    a.Size = UDim2.new(10,0, 10,0)
